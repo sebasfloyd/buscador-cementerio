@@ -9,10 +9,15 @@ function buscar() {
     const resultados = document.getElementById('resultado');
     
     // Verifica si se ingresó un apellido antes de realizar la búsqueda
-    if (apellido) {
+    if (apellido.trim() !== '') { // Verifica si el campo de apellido no está vacío
         // Realiza una solicitud GET al servidor para buscar fallecidos por apellido
         fetch(`/buscar?apellido=${encodeURIComponent(apellido)}`)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Respuesta no válida del servidor');
+                }
+                return response.json();
+            })
             .then(data => {
                 resultados.innerHTML = ''; // Borra los resultados anteriores
                 if (data && data.length > 0) {
@@ -37,9 +42,9 @@ function buscar() {
 
 function agregar() {
     // Obtiene los valores de los campos de entrada
-    const nombre = document.getElementById('nombre').value;
-    const apellido = document.getElementById('apellidoNuevo').value;
-    const direccion = document.getElementById('direccion').value;
+    const nombre = document.getElementById('nombre').value.trim(); // Elimina espacios en blanco al inicio y al final
+    const apellido = document.getElementById('apellidoNuevo').value.trim();
+    const direccion = document.getElementById('direccion').value.trim();
     
     // Verifica si se completaron todos los campos antes de agregar un registro
     if (nombre && apellido && direccion) {
@@ -51,7 +56,12 @@ function agregar() {
             },
             body: JSON.stringify({ nombre, apellido, direccion }),
         })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Respuesta no válida del servidor');
+                }
+                return response.json();
+            })
             .then(data => {
                 if (data.error) {
                     // Si hay un error al agregar el registro, muestra un mensaje de error
