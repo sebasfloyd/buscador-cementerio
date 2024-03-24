@@ -31,16 +31,24 @@ app.get('/', (req, res) => {
 
 // Controlador para manejar las solicitudes POST en la ruta '/agregar'
 app.post('/agregar', (req, res) => {
-    // Lógica para procesar la solicitud POST y agregar el nuevo registro
     // Extrae los datos del cuerpo de la solicitud
     const { nombre, apellido, direccion } = req.body;
     
-    // Aquí debes agregar la lógica para agregar el registro a la base de datos o donde sea necesario
-    // Por ahora, simplemente logramos los datos recibidos
-    console.log('Datos recibidos para agregar:', nombre, apellido, direccion);
+    // Verifica si se proporcionaron todos los datos necesarios
+    if (!nombre || !apellido || !direccion) {
+        return res.status(400).json({ error: 'Por favor, complete todos los campos para agregar un registro.' });
+    }
     
-    // Envía una respuesta al cliente
-    res.json({ message: 'Registro agregado correctamente' });
+    // Inserta el nuevo registro en la base de datos
+    db.run('INSERT INTO fallecidos (nombre, apellido, direccion) VALUES (?, ?, ?)', [nombre, apellido, direccion], function(err) {
+        if (err) {
+            console.error('Error al agregar el registro:', err.message);
+            return res.status(500).json({ error: 'Hubo un error al agregar el registro.' });
+        }
+        
+        // Devuelve la ID del registro recién agregado
+        res.json({ id: this.lastID });
+    });
 });
 
 // Inicia el servidor
