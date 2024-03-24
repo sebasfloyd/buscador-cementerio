@@ -2,43 +2,33 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geolocalización de Familiares</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Geolocalización de Familiares</h1>
-
-    <section>
-        <h2>Buscar Fallecido por Apellido</h2>
-        <input type="text" id="apellido" placeholder="Ingrese Apellido">
+    
+    <!-- Formulario de búsqueda -->
+    <div>
+        <label for="apellido">Buscar por Apellido:</label>
+        <input type="text" id="apellido" name="apellido" placeholder="Ingrese el apellido">
         <button id="searchButton">Buscar</button>
-        <div id="resultado"></div>
-    </section>
+    </div>
+    <div id="resultado"></div>
 
-    <section>
-        <h2>Agregar Fallecido</h2>
-        <p>Para obtener la URL de Google Maps del lugar donde se encuentra el fallecido, sigue los pasos indicados anteriormente.</p>
+    <!-- Formulario de agregar registro -->
+    <div>
+        <h2>Agregar Nuevo Registro</h2>
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" placeholder="Nombre">
+        <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre">
         <label for="apellidoNuevo">Apellido:</label>
-        <input type="text" id="apellidoNuevo" placeholder="Apellido">
-        <label for="direccion">URL de Google Maps:</label>
-        <input type="text" id="direccion" placeholder="URL de Google Maps">
-        <div class="select-wrapper">
-            <label for="cementerio">Cementerio:</label>
-            <select id="cementerio">
-                <option value="cementerio1">Cementerio Israelita de La Tablada</option>
-                <option value="cementerio2">Cementerio de Liniers</option>
-                <option value="cementerio3">Cementerio de Tablada</option>
-                <option value="cementerio3">Cementerio de Berazategui</option>
-                <option value="cementerio3">Cementerio de Ciudadela</option>
-                <!-- Agrega más opciones según sea necesario -->
-            </select>
-        </div>
+        <input type="text" id="apellidoNuevo" name="apellidoNuevo" placeholder="Ingrese el apellido">
+        <label for="direccion">Dirección (URL de Google Maps):</label>
+        <input type="text" id="direccion" name="direccion" placeholder="Ingrese la dirección de Google Maps">
         <button id="addButton">Agregar</button>
-    </section>
-    
-    
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
