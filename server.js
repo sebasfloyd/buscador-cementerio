@@ -7,9 +7,10 @@ const port = process.env.PORT || 3009; // Utiliza el puerto proporcionado por el
 // Conectar a la base de datos SQLite
 const db = new sqlite3.Database('./database.sqlite', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
     if (err) {
-        console.error(err.message);
+        console.error('Error al conectar a la base de datos SQLite:', err.message);
     } else {
         console.log('Conectado a la base de datos SQLite.');
+        // Crear la tabla si no existe
         db.run(`CREATE TABLE IF NOT EXISTS fallecidos (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nombre TEXT,
@@ -35,6 +36,8 @@ app.post('/agregar', (req, res) => {
     const { nombre, apellido, direccion } = req.body;
     
     // Aquí debes agregar la lógica para agregar el registro a la base de datos o donde sea necesario
+    // Por ahora, simplemente logramos los datos recibidos
+    console.log('Datos recibidos para agregar:', nombre, apellido, direccion);
     
     // Envía una respuesta al cliente
     res.json({ message: 'Registro agregado correctamente' });
@@ -44,4 +47,3 @@ app.post('/agregar', (req, res) => {
 app.listen(port, () => {
     console.log(`Servidor en ejecución en http://localhost:${port}`);
 });
-
