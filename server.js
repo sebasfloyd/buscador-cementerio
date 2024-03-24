@@ -30,8 +30,35 @@ app.get('/', (req, res) => {
 
 // Resto de las rutas de tu API...
 
+// Importa los módulos necesarios
+const express = require('express');
+const app = express();
+
+// Configura el middleware para analizar JSON en las solicitudes POST
+app.use(express.json());
+
+// Controlador para manejar las solicitudes POST en la ruta '/agregar'
+app.post('/agregar', (req, res) => {
+    // Lógica para procesar la solicitud POST y agregar el nuevo registro
+    // Extrae los datos del cuerpo de la solicitud
+    const { nombre, apellido, direccion } = req.body;
+    
+    // Aquí debes agregar la lógica para agregar el registro a la base de datos o donde sea necesario
+    
+    // Envía una respuesta al cliente
+    res.json({ message: 'Registro agregado correctamente' });
+});
+
+// Inicia el servidor
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Servidor en ejecución en el puerto ${PORT}`);
+});
+
+
 // Iniciar el servidor
 app.listen(port, () => {
     console.log(`Servidor en ejecución en http://localhost:${port}`);
 });
+
 +
