@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geolocalización de Familiares</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -10,7 +11,7 @@
 
     <section>
         <h2>Buscar Fallecido por Apellido</h2>
-        <input type="text" id="apellido" placeholder="Ingrese Apellido">
+        <input type="text" id="apellido" name="apellido" placeholder="Ingrese Apellido">
         <button id="searchButton">Buscar</button>
         <div id="resultado"></div>
     </section>
@@ -19,19 +20,19 @@
         <h2>Agregar Fallecido</h2>
         <p>Para obtener la URL de Google Maps del lugar donde se encuentra el fallecido, sigue los pasos indicados anteriormente.</p>
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" placeholder="Nombre">
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre">
         <label for="apellidoNuevo">Apellido:</label>
-        <input type="text" id="apellidoNuevo" placeholder="Apellido">
+        <input type="text" id="apellidoNuevo" name="apellidoNuevo" placeholder="Apellido">
         <label for="direccion">URL de Google Maps:</label>
-        <input type="text" id="direccion" placeholder="URL de Google Maps">
+        <input type="text" id="direccion" name="direccion" placeholder="URL de Google Maps">
         <div class="select-wrapper">
             <label for="cementerio">Cementerio:</label>
-            <select id="cementerio">
+            <select id="cementerio" name="cementerio">
                 <option value="cementerio1">Cementerio Israelita de La Tablada</option>
                 <option value="cementerio2">Cementerio de Liniers</option>
                 <option value="cementerio3">Cementerio de Tablada</option>
-                <option value="cementerio3">Cementerio de Berazategui</option>
-                <option value="cementerio3">Cementerio de Ciudadela</option>
+                <option value="cementerio4">Cementerio de Berazategui</option>
+                <option value="cementerio5">Cementerio de Ciudadela</option>
                 <!-- Agrega más opciones según sea necesario -->
             </select>
         </div>
