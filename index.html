@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Geolocalización de Familiares</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Geolocalización de Familiares</h1>
+
+    <section>
+        <h2>Buscar Fallecido por Apellido</h2>
+        <input type="text" id="apellido" placeholder="Ingrese Apellido">
+        <button id="searchButton">Buscar</button>
+        <div id="resultado"></div>
+    </section>
+
+    <section>
+        <h2>Agregar Fallecido</h2>
+        <p>Para obtener la URL de Google Maps del lugar donde se encuentra el fallecido, sigue los pasos indicados anteriormente.</p>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" placeholder="Nombre">
+        <label for="apellidoNuevo">Apellido:</label>
+        <input type="text" id="apellidoNuevo" placeholder="Apellido">
+        <label for="direccion">URL de Google Maps:</label>
+        <input type="text" id="direccion" placeholder="URL de Google Maps">
+        <div class="select-wrapper">
+            <label for="cementerio">Cementerio:</label>
+            <select id="cementerio">
+                <option value="cementerio1">Cementerio Israelita de La Tablada</option>
+                <option value="cementerio2">Cementerio de Liniers</option>
+                <option value="cementerio3">Cementerio de Tablada</option>
+                <option value="cementerio3">Cementerio de Berazategui</option>
+                <option value="cementerio3">Cementerio de Ciudadela</option>
+                <!-- Agrega más opciones según sea necesario -->
+            </select>
+        </div>
+        <button id="addButton">Agregar</button>
+    </section>
+    
+    
+    <script src="script.js"></script>
+</body>
+</html>
