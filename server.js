@@ -28,15 +28,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Resto de las rutas de tu API...
-
-// Importa los módulos necesarios
-const express = require('express');
-const app = express();
-
-// Configura el middleware para analizar JSON en las solicitudes POST
-app.use(express.json());
-
 // Controlador para manejar las solicitudes POST en la ruta '/agregar'
 app.post('/agregar', (req, res) => {
     // Lógica para procesar la solicitud POST y agregar el nuevo registro
@@ -50,15 +41,7 @@ app.post('/agregar', (req, res) => {
 });
 
 // Inicia el servidor
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Servidor en ejecución en el puerto ${PORT}`);
-});
-
-
-// Iniciar el servidor
 app.listen(port, () => {
     console.log(`Servidor en ejecución en http://localhost:${port}`);
 });
 
-+
