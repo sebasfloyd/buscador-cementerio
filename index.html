@@ -1,63 +1,43 @@
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('searchButton').addEventListener('click', buscar);
-    document.getElementById('addButton').addEventListener('click', agregar);
-});
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Geolocalización de Familiares</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Geolocalización de Familiares</h1>
 
-function buscar() {
-    const apellido = document.getElementById('apellido').value;
-    const resultados = document.getElementById('resultado');
-    if (apellido) {
-        fetch(`/buscar?apellido=${encodeURIComponent(apellido)}`)
-            .then(response => response.json())
-            .then(data => {
-                resultados.innerHTML = '';
-                if (data && data.length > 0) {
-                    data.forEach(fallecido => {
-                        resultados.innerHTML += `<p>${fallecido.nombre} ${fallecido.apellido} - <a href="${fallecido.direccion}" target="_blank">Ver en Mapa</a></p>`;
-                    });
-                } else {
-                    resultados.innerHTML = '<p>No se encontraron resultados.</p>';
-                }
-            })
-            .catch(error => {
-                console.error('Error al buscar:', error);
-                resultados.innerHTML = '<p>Hubo un error al realizar la búsqueda.</p>';
-            });
-    } else {
-        resultados.innerHTML = '<p>Por favor, ingrese un apellido para buscar.</p>';
-    }
-}
+    <section>
+        <h2>Buscar Fallecido por Apellido</h2>
+        <input type="text" id="apellido" placeholder="Ingrese Apellido">
+        <button id="searchButton">Buscar</button>
+        <div id="resultado"></div>
+    </section>
 
-function agregar() {
-    const nombre = document.getElementById('nombre').value;
-    const apellido = document.getElementById('apellidoNuevo').value;
-    const direccion = document.getElementById('direccion').value;
-    const cementerio = document.getElementById('cementerio').value;
+    <section>
+        <h2>Agregar Fallecido</h2>
+        <p>Para obtener la URL de Google Maps del lugar donde se encuentra el fallecido, sigue los pasos indicados anteriormente.</p>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" placeholder="Nombre">
+        <label for="apellidoNuevo">Apellido:</label>
+        <input type="text" id="apellidoNuevo" placeholder="Apellido">
+        <label for="direccion">URL de Google Maps:</label>
+        <input type="text" id="direccion" placeholder="URL de Google Maps">
+        <div class="select-wrapper">
+            <label for="cementerio">Cementerio:</label>
+            <select id="cementerio">
+                <option value="cementerio1">Cementerio Israelita de La Tablada</option>
+                <option value="cementerio2">Cementerio de Liniers</option>
+                <option value="cementerio3">Cementerio de Tablada</option>
+                <option value="cementerio3">Cementerio de Berazategui</option>
+                <option value="cementerio3">Cementerio de Ciudadela</option>
+                <!-- Agrega más opciones según sea necesario -->
+            </select>
+        </div>
+        <button id="addButton">Agregar</button>
+    </section>
     
-    if (nombre && apellido && direccion && cementerio) {
-        fetch('/agregar', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ nombre, apellido, direccion, cementerio }),
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    alert('Error al agregar el registro: ' + data.error);
-                } else {
-                    alert('Registro agregado con éxito. ID: ' + data.id);
-                    document.getElementById('nombre').value = '';
-                    document.getElementById('apellidoNuevo').value = '';
-                    document.getElementById('direccion').value = '';
-                }
-            })
-            .catch(error => {
-                console.error('Error al agregar:', error);
-                alert('Hubo un error al agregar el registro.');
-            });
-    } else {
-        alert('Por favor, complete todos los campos para agregar un registro.');
-    }
-}
+    <script src="script.js"></script>
+</body>
+</html>
