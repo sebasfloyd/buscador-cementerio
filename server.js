@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const sqlite3 = require('sqlite3').verbose();
 const app = express();
-const port = process.env.PORT || 3009; // Utiliza el puerto proporcionado por el entorno de alojamiento o 3009 por defecto.
+const port = process.env.PORT || 3009;
 
 // Conectar a la base de datos SQLite
 const db = new sqlite3.Database('./database.sqlite', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
@@ -10,7 +10,6 @@ const db = new sqlite3.Database('./database.sqlite', sqlite3.OPEN_READWRITE | sq
         console.error('Error al conectar a la base de datos SQLite:', err.message);
     } else {
         console.log('Conectado a la base de datos SQLite.');
-        // Crear la tabla si no existe
         db.run(`CREATE TABLE IF NOT EXISTS fallecidos (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nombre TEXT,
@@ -22,24 +21,17 @@ const db = new sqlite3.Database('./database.sqlite', sqlite3.OPEN_READWRITE | sq
 
 // Middleware para parsear el cuerpo de las solicitudes POST y para servir archivos estáticos
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public'))); // Asegúrate de que tus archivos estáticos estén en el directorio "public".
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Ruta raíz para servir el archivo index.html
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Controlador para manejar las solicitudes POST en la ruta '/agregar'
 app.post('/agregar', (req, res) => {
-    // Lógica para procesar la solicitud POST y agregar el nuevo registro
-    // Extrae los datos del cuerpo de la solicitud
     const { nombre, apellido, direccion } = req.body;
-    
-    // Aquí debes agregar la lógica para agregar el registro a la base de datos o donde sea necesario
-    // Por ahora, simplemente logramos los datos recibidos
     console.log('Datos recibidos para agregar:', nombre, apellido, direccion);
-    
-    // Envía una respuesta al cliente
     res.json({ message: 'Registro agregado correctamente' });
 });
 
