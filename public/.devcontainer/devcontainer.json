@@ -1,0 +1,13 @@
+{
+  "name": "Node.js",
+  "build": {
+    "dockerfile": "../Dockerfile",
+    "context": ".."
+  },
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "forwardPorts": [3009],
+  "postCreateCommand": "npm install",
+  "remoteUser": "node"
+}
